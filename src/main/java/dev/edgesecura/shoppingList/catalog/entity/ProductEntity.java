@@ -16,6 +16,9 @@ public class ProductEntity {
     @Column(name = "display_name", nullable = false)
     private String displayName;
 
+    @Column(name = "display_name_es")
+    private String displayNameEs;
+
     private String thumbnail;
 
     @Column(name = "unit_price", precision = 10, scale = 2)
@@ -34,6 +37,7 @@ public class ProductEntity {
 
     public String getId() { return id; }
     public String getDisplayName() { return displayName; }
+    public String getDisplayNameEs() { return displayNameEs; }
     public String getThumbnail() { return thumbnail; }
     public BigDecimal getUnitPrice() { return unitPrice; }
 }

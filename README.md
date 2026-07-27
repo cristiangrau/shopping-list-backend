@@ -96,3 +96,26 @@ coupling to web/iOS releases. Only contract is the JSON over HTTPS.
 
 `src/main/resources/categories.json` holds the seed catalog. Loader runs once
 on first boot if the catalog is empty.
+
+### Spanish product names
+
+Products keep their Catalan label in `catalog.products.display_name` and the
+optional Spanish label in `catalog.products.display_name_es`. Catalog product
+responses expose these as `displayName` and `displayNameEs`.
+
+Generate the idempotent schema/backfill migration from a Spanish Mercadona
+snapshot with:
+
+```bash
+node scripts/generate-spanish-product-names.mjs \
+  /path/to/categories_es.json \
+  src/main/resources/db/add_spanish_product_names.sql
+```
+
+Because production uses `spring.jpa.hibernate.ddl-auto=validate`, apply
+`src/main/resources/db/add_spanish_product_names.sql` before deploying a WAR
+that expects the new column:
+
+```bash
+psql -d catalog -f src/main/resources/db/add_spanish_product_names.sql
+```

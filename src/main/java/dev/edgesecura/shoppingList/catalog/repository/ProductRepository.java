@@ -45,6 +45,12 @@ public interface ProductRepository extends JpaRepository<ProductEntity, String> 
         """)
     Page<ProductEntity> findByCategoryId(@Param("categoryId") long categoryId, Pageable pageable);
 
-    Page<ProductEntity> findByDisplayNameContainingIgnoreCase(String q, Pageable pageable);
+    @Query("""
+        select p
+        from ProductEntity p
+        where lower(p.displayName) like lower(concat('%', :q, '%'))
+           or lower(coalesce(p.displayNameEs, '')) like lower(concat('%', :q, '%'))
+        """)
+    Page<ProductEntity> searchByName(@Param("q") String q, Pageable pageable);
 
 }

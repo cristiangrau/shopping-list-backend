@@ -5,14 +5,20 @@ import java.math.BigDecimal;
 public class ProductNode {
     private String id;
     private String displayName;
+    private String displayNameEs;
     private String thumbnail;
     private BigDecimal unitPrice;
 
     public ProductNode() {}
 
     public ProductNode(String id, String displayName, String thumbnail, BigDecimal unitPrice) {
+        this(id, displayName, null, thumbnail, unitPrice);
+    }
+
+    public ProductNode(String id, String displayName, String displayNameEs, String thumbnail, BigDecimal unitPrice) {
         this.id = id;
         this.displayName = displayName;
+        this.displayNameEs = displayNameEs;
         this.thumbnail = thumbnail;
         this.unitPrice = unitPrice;
     }
@@ -31,6 +37,14 @@ public class ProductNode {
 
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
+    }
+
+    public String getDisplayNameEs() {
+        return displayNameEs;
+    }
+
+    public void setDisplayNameEs(String displayNameEs) {
+        this.displayNameEs = displayNameEs;
     }
 
     public String getThumbnail() {

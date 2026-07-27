@@ -8,6 +8,7 @@ public class ProductResponse {
 
     private String id;
     private String displayName;
+    private String displayNameEs;
     private String thumbnail;
     private String unitPrice;
 
@@ -26,6 +27,9 @@ public class ProductResponse {
     public String getDisplayName() { return displayName; }
     public void setDisplayName(String displayName) { this.displayName = displayName; }
 
+    public String getDisplayNameEs() { return displayNameEs; }
+    public void setDisplayNameEs(String displayNameEs) { this.displayNameEs = displayNameEs; }
+
     public String getThumbnail() { return thumbnail; }
     public void setThumbnail(String thumbnail) { this.thumbnail = thumbnail; }
 
@@ -36,6 +40,7 @@ public class ProductResponse {
         ProductResponse r = new ProductResponse();
         r.setId(entity.getId());
         r.setDisplayName(entity.getDisplayName());
+        r.setDisplayNameEs(entity.getDisplayNameEs());
         r.setThumbnail(entity.getThumbnail());
         r.setUnitPrice(entity.getUnitPrice().toPlainString());
         return r;

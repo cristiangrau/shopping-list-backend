@@ -87,6 +87,7 @@ public class CatalogMapper {
                         ProductResponse pr = new ProductResponse();
                         pr.setId(p.getProduct().getId());
                         pr.setDisplayName(p.getProduct().getDisplayName());
+                        pr.setDisplayNameEs(p.getProduct().getDisplayNameEs());
                         pr.setThumbnail(p.getProduct().getThumbnail());
                         pr.setUnitPrice(p.getProduct().getUnitPrice().toPlainString());
                         return pr;
@@ -247,6 +248,7 @@ public class CatalogMapper {
         node.setId(entity.getId());
 
         node.setDisplayName(entity.getDisplayName());
+        node.setDisplayNameEs(entity.getDisplayNameEs());
         node.setThumbnail(entity.getThumbnail());
         node.setUnitPrice(entity.getUnitPrice());
 
@@ -257,6 +259,7 @@ public class CatalogMapper {
         ProductResponse r = new ProductResponse();
         r.setId(entity.getId());                 // String
         r.setDisplayName(entity.getDisplayName());
+        r.setDisplayNameEs(entity.getDisplayNameEs());
         r.setThumbnail(entity.getThumbnail());
         r.setUnitPrice(entity.getUnitPrice().toPlainString());   // BigDecimal or String depending on your DTO
         return r;

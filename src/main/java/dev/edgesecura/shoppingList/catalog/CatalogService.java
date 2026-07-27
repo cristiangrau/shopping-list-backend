@@ -228,6 +228,7 @@ public class CatalogService {
             String displayName = (String) row[2];
             String thumbnail = (String) row[3];
             Object unitPriceObj = row[4];
+            String displayNameEs = row.length > 7 ? (String) row[7] : null;
 
             BigDecimal unitPrice = null;
 
@@ -243,7 +244,7 @@ public class CatalogService {
 
             productsByCategory
                     .computeIfAbsent(categoryId, k -> new ArrayList<>())
-                    .add(new ProductNode(productId, displayName, thumbnail, unitPrice));
+                    .add(new ProductNode(productId, displayName, displayNameEs, thumbnail, unitPrice));
         }
 
         // Attach to nodes
@@ -314,7 +315,7 @@ public class CatalogService {
 
     private ProductNode toProductNode(ProductEntity p) {
         BigDecimal unitPrice = p.getUnitPrice() == null ? null : p.getUnitPrice();
-        return new ProductNode(p.getId(), p.getDisplayName(), p.getThumbnail(), unitPrice);
+        return new ProductNode(p.getId(), p.getDisplayName(), p.getDisplayNameEs(), p.getThumbnail(), unitPrice);
     }
 
     public PagedResponse<ProductNode> getProducts(int offset, int limit, String sortBy, SortDir dir) {
@@ -366,7 +367,7 @@ public class CatalogService {
 
     public List<ProductNode> searchProducts(String q, int limit) {
         int safeLimit = Math.max(1, Math.min(limit, 100)); // prevent crazy limits
-        Page<ProductEntity> page = productRepository.findByDisplayNameContainingIgnoreCase(
+        Page<ProductEntity> page = productRepository.searchByName(
                 q,
                 PageRequest.of(0, safeLimit, Sort.by("displayName").ascending())
         );
